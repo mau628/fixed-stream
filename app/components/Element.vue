@@ -2,14 +2,14 @@
   <div class="card is-clickable" @click="navigate">
     <div class="card-image">
       <figure class="image">
-        <img :src="streamImage" :alt="props.element.title + ' image'" />
+        <img :src="`assets/${streamImage}`" :alt="props.element.title + ' image'" />
       </figure>
     </div>
     <div class="card-content">
       <div class="media">
         <div class="media-left">
           <figure class="image is-48x48">
-            <img :src="`/assets/${streamSource}`" :alt="props.element.source" />
+            <img :src="`assets/${streamSource}`" :alt="props.element.source" />
           </figure>
         </div>
         <div class="media-content">
@@ -47,7 +47,7 @@ const streamSource = computed(() => {
 })
 const streamImage = computed(() => {
   if (props.element.image) {
-    return `assets/${props.element.image}`
+    return `${props.element.image}`
   }
   return "https://bulma.io/assets/images/placeholders/1280x960.png"
 })
