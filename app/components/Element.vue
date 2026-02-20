@@ -1,36 +1,57 @@
 <template>
-  <div class="card">
+  <div class="card is-clickable" @click="navigate">
     <div class="card-image">
-      <figure class="image is-4by3">
-        <img src="https://bulma.io/assets/images/placeholders/1280x960.png" alt="Placeholder image" />
+      <figure class="image">
+        <img :src="streamImage" :alt="props.element.title + ' image'" />
       </figure>
     </div>
     <div class="card-content">
       <div class="media">
         <div class="media-left">
           <figure class="image is-48x48">
-            <img src="https://bulma.io/assets/images/placeholders/96x96.png" alt="Placeholder image" />
+            <img :src="`/assets/${streamSource}`" :alt="props.element.source" />
           </figure>
         </div>
         <div class="media-content">
-          <p class="title is-4">John Smith</p>
-          <p class="subtitle is-6">@johnsmith</p>
+          <p class="title is-4">{{ props.element.title }}</p>
         </div>
-      </div>
-
-      <div class="content">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec
-        iaculis mauris. <a>@bulmaio</a>. <a href="#">#css</a>
-        <a href="#">#responsive</a>
-        <br />
-        <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
       </div>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
+const props = defineProps<{
+  element: Show
+}>()
 
+const streamSource = computed(() => {
+  if (props.element.source) {
+    switch (props.element.source.toUpperCase()) {
+      case "DISNEY":
+      case "DISNEY+":
+        return "disney-logo.svg"
+      case "YOUTUBE":
+        return "youtube-logo.svg"
+      case "AMAZON":
+      case "PRIME VIDEO":
+        return "prime-video-logo.svg"
+      case "HBO MAX":
+      case "HBO":
+        return "hbo-max-logo.svg"
+      default:
+        return props.element.source
+    }
+  }
+  return "Unknown"
+})
+const streamImage = computed(() => {
+  if (props.element.image) {
+    return `assets/${props.element.image}`
+  }
+  return "https://bulma.io/assets/images/placeholders/1280x960.png"
+})
+const navigate = () => useUrl(props.element) 
 </script>
 
 <style></style>

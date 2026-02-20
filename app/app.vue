@@ -2,7 +2,7 @@
   <section class="section">
     <div class="container">
       <div class="columns is-centered">
-        <div class="column is-narrow">
+        <div class="column">
           <Home />
         </div>
       </div>
